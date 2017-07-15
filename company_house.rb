@@ -57,20 +57,19 @@ class Company
     company_name = @@b.span(:id => 'ctl00_MainContent_PrintSaveCompanyNameBar1_lblCompanyNameResult')
     company_name = company_name.exists? ? company_name.inner_html : "-"
 
-  return "#{company_name}\t#{company_id}\t#{company_house}\t#{company_rating}\t#{credit_limit}\t#{contract_limit}\t#{company_status}\t#{company_debt}\t#{industry_debt}\t#{last_financial}\t#{company_website}\t#{comments}\n"
+    output = {"company_name"=> company_name,
+              "company_id" => company_id,
+              "company_house_link" => company_house,
+              "company_rating" => company_rating,
+              "credit_limit" => credit_limit,
+              "contract_limit" => contract_limit,
+              "company_status" => company_status,
+              "company_debt" => company_debt,
+              "industry_debt" =>  industry_debt,
+              "last_financial" => last_financial,
+              "company_website" => company_website,
+              "comments" => comments}
+
+   return output
   end
 end
-
-# # lets create the file to dump our dattainto
-# f = File.new("creditsafecheck.txt",  'w+')
-#
-# cids = ["4363859","3538207","6869858","4741528","NI065249","5108236","6401266","5559143","6123808","5696336","3786396","5237898","SC300349","6640668","6692184","5819737","7952651","7619383","7914165","6302237","6872129","7379137","7179911","6863028","9377714","9171042","9627585","9660828","9370840","6063185"]
-# c = Company.new()
-# f.print "company_name\tcompany_id\tcompany_house\tcompany_rating\tcredit_limit\tcontract_limit\tcompany_status\tcompany_debt\tindustry_debt\tlast_financial\tcompany_website\tcomments\n"
-# cids.each do |cid|
-#   if cid.size < 8
-#     cid= "0" + cid
-#   end
-#   f.print c.get_record(cid)
-# end
-# f.close
