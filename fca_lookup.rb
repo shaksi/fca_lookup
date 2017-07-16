@@ -16,7 +16,9 @@ class FCAlookup
     t.set @keyword
     btn = @@b.button value: 'Search the Register'
     btn.click
-
+    # lets limit our search to payment service firms
+    @@b.checkbox(:value => "PSD").set
+    @@b.button(:value => "Filter Results").click
     # create page listing for 500 accnt
     @@b.select_list(:name, "SearchResults_length").select_value("500")
   end
@@ -62,7 +64,7 @@ class FCAlookup
             out['fca'] = td.a.href
             out['type'] = type
             out['status'] = status
-            f.print out.values.map{|e|"#{e}"}.join(';')
+            f.print out.values.map{|e|"#{e}"}.join("\t")
           end
 
           # f.print "#{linktxt}\t#{td.a.href}\t#{cid}\t#{type}\t#{date}\t#{status}"
